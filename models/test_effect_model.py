@@ -38,9 +38,11 @@ class TestEffectModel(BaseModel):
         self.input_B = temp_B
 
     def test(self):
-        self.real_A = Variable(self.input_A, volatile=True)
+        self.real_A = Variable(self.input_A)
+        self.real_B = None
+        self.fake_B = None
         self.fake_B = self.netG.forward(self.real_A)
-        self.real_B = Variable(self.input_B, volatile=True)
+        self.real_B = Variable(self.input_B)
 
     # get image paths
     def get_image_paths(self):
@@ -50,4 +52,4 @@ class TestEffectModel(BaseModel):
         real_A = util.tensor2im(self.real_A.data)
         fake_B = util.tensor2im(self.fake_B.data)
         real_B = util.tensor2im(self.real_B.data)
-        return OrderedDict([('real_A', real_A), ('fake_B', fake_B)])
+        return OrderedDict([('real_A', real_A), ('fake_B', fake_B), ('real_B', real_B)])

@@ -7,7 +7,7 @@ from util.visualizer import Visualizer
 from pdb import set_trace as st
 from util import html
 from util.metrics import PSNR
-import ssim
+from SSIM_PIL import compare_ssim
 from PIL import Image
 
 opt = TestOptions().parse()
@@ -28,24 +28,27 @@ webpage = html.HTML(web_dir, 'Experiment = %s, Phase = %s, Epoch = %s' % (opt.na
 avgPSNR = 0.0
 avgSSIM = 0.0
 counter = 0
-
+print(len(dataset))
 for i, data in enumerate(dataset):
     if i >= opt.how_many:
         break
-    counter = i
+    counter += 1
     model.set_input(data)
     model.test()
     visuals = model.get_current_visuals()
     avgPSNR += PSNR(visuals['fake_B'],visuals['real_B'])
     pilFake = Image.fromarray(visuals['fake_B'])
     pilReal = Image.fromarray(visuals['real_B'])
-    avgSSIM += SSIM(pilFake).cw_ssim_value(pilReal)
+    avgSSIM += compare_ssim(pilFake, pilReal)
     img_path = model.get_image_paths()
     print('process image... %s' % img_path)
-    visualizer.save_images(webpage, visuals, img_path)
+    #visualizer.save_images(webpage, visuals, img_path)
 
+print(counter)
 avgPSNR /= counter
 avgSSIM /= counter
 print('PSNR = %f, SSIM = %f' % (avgPSNR, avgSSIM))
-
+#f = open('effect.txt', 'a')
+#f.write(str(counter) + ' ' + str(avgPSNR) + ' ' + str(avgSSIM))
+#f.close()
 webpage.save()

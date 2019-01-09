@@ -35,8 +35,8 @@ class DoubleDataset(BaseDataset):
 
         B_img = self.transform(B_img)
 
-        print('A_path: ' + A_path)
-        print('B_path: ' + B_path)
+        #print('A_path: ' + A_path)
+        #print('B_path: ' + B_path)
 
         return {'A': A_img, 'A_paths': A_path, 'B': B_img, 'B_paths': B_path}
 
