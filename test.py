@@ -7,7 +7,7 @@ from util.visualizer import Visualizer
 from pdb import set_trace as st
 from util import html
 from util.metrics import PSNR
-import ssim
+#import ssim
 from PIL import Image
 
 opt = TestOptions().parse()

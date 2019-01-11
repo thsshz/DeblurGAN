@@ -33,7 +33,7 @@ class TestModel(BaseModel):
         self.image_paths = input['A_paths']
 
     def test(self):
-        self.real_A = Variable(self.input_A, volatile=True)
+        self.real_A = Variable(self.input_A)
         self.fake_B = self.netG.forward(self.real_A)
 
     # get image paths
