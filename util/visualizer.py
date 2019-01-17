@@ -129,7 +129,10 @@ class Visualizer():
         links = []
 
         for label, image_numpy in visuals.items():
-            image_name = '%s_%s.png' % (name, label)
+            if label == 'fake_B':
+                image_name = '%s.png' % (name)
+            else:
+                image_name = '%s_%s.png' % (name, label)
             save_path = os.path.join(image_dir, image_name)
             util.save_image(image_numpy, save_path)
 

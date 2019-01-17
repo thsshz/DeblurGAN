@@ -2,9 +2,9 @@ from PIL import Image
 
 base_dir = 'task/'
 result_dir = 'trans_task/'
-size = 200
+size = 256
 coor_list = [0, 181, 363, 544]
-for i in range(5):
+for i in range(1,6):
     img = Image.open(base_dir + str(i) + '.jpg')
     for m in range(4):
         for n in range(4):
