@@ -3,7 +3,7 @@ from interval import Interval
 from PIL import Image
 from numpy import *
 
-intervals = [Interval(181, 255), Interval(363, 436), Interval(544, 618)] #闭区间
+intervals = [Interval(181, 255), Interval(363, 436), Interval(544, 618)]
 breakpoints = [0, 181, 363, 544]
 
 def pic_stitch(image_arr_arr):
@@ -65,4 +65,4 @@ if __name__ == '__main__':
             print("start to stitch %(pic_name)s%(suffix)s"%{'pic_name':pic_name, 'suffix':suffix})
             image_arr_arr = get_image_arr_arr(path, pic_name, suffix)
             image_arr = pic_stitch(image_arr_arr)
-            put_image('.', pic_name + suffix, image_arr)
+            put_image('stitch_result', pic_name + suffix, image_arr)
